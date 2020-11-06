@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public int electro = 0;
+	public int TotalElectro = 0; //по сути наши деньги
+    public int TotalGenerator = 1; //общее количество генераторов
 
     // Start is called before the first frame update
     void Start()
