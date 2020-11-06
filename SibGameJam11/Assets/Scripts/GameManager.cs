@@ -1,47 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Generator[] generators;
-    [Space]
 	public float Electricity = 0;
+    [HideInInspector] public float ElectricityInTotal;
+    [Space]
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        foreach (var generator in generators)
-        {
-            Electricity += generator.NumberOfGenerators * generator.ElectricityPerMoment;
-        }
-
-        print(Mathf.FloorToInt(Electricity));
-    }
-
-    public void DebuffGeneratorOfType(string type, float debuffTime) 
-    {
-        StartCoroutine(type, debuffTime);
-    }
-
-
-    private IEnumerator DebuffTime(string type, float debuffTime)
-    {
-        Generator element = GetElementByType(type);
-        float defaultElectricity = element.ElectricityPerMoment;
-
-        element.ElectricityPerMoment /= 2;
-
-        yield return new WaitForSeconds(debuffTime);
-
-        element.ElectricityPerMoment = defaultElectricity;
-    }
-
+    [SerializeField] Generator[] generators;
     private Generator GetElementByType(string type)
     {
         Generator elementOfType = null;
@@ -56,6 +24,38 @@ public class GameManager : MonoBehaviour
 
         return elementOfType;
     }
+
+    void Update()
+    {
+        foreach (var generator in generators)
+        {
+            ElectricityInTotal += generator.NumberOfGenerators * generator.ElectricityPerMoment * Time.deltaTime;
+            Electricity += generator.NumberOfGenerators * generator.ElectricityPerMoment * Time.deltaTime;
+        }
+
+        print(Mathf.FloorToInt(Electricity));
+    }
+
+    #region Debuff:
+
+    public void DebuffGeneratorOfType(string type, float debuffTime)
+    {
+        StartCoroutine(DebuffTime(type, debuffTime));
+    }
+
+    private IEnumerator DebuffTime(string type, float debuffTime)
+    {
+        Generator element = GetElementByType(type);
+        float defaultElectricity = element.ElectricityPerMoment;
+
+        element.ElectricityPerMoment /= 2;
+
+        yield return new WaitForSeconds(debuffTime);
+
+        element.ElectricityPerMoment = defaultElectricity;
+    }
+
+    #endregion
 }
 
 [System.Serializable]

@@ -16,7 +16,7 @@ public class EventManager : MonoBehaviour
     {
         foreach (GameEvent gameEvent in events)
         {
-            if (!gameEvent.Executed && gameManager.Electricity >= gameEvent.EnergyNeeded)
+            if (!gameEvent.Executed && gameManager.ElectricityInTotal >= gameEvent.EnergyNeeded)
             {
                 gameEvent.Executed = true;
                 gameManager.DebuffGeneratorOfType(gameEvent.TypeOfGenerators, gameEvent.DebuffTime);
@@ -29,8 +29,8 @@ public class EventManager : MonoBehaviour
 [System.Serializable]
 class GameEvent
 {
-    public float EnergyNeeded;
     public string NameOfEvent;
+    public float EnergyNeeded;
     public string TypeOfGenerators;
     public float DebuffTime = 5;
     [HideInInspector] public bool Executed = false;
