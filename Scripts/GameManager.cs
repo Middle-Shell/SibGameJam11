@@ -4,19 +4,37 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public int TotalElectro = 0; //по сути наши деньги
-    public int TotalGenerator = 1; //общее количество генераторов
+	public float Electricity = 0;
+    public float summ;
+    [SerializeField] Generators[] types;
 
     // Start is called before the first frame update
     void Start()
     {
-    	
+        InvokeRepeating("Work", 1.0f, 1f);
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void Work()
     {
-        
+        summ = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            //Наверное здесь должна быть проверка на работу типа генератора
+            summ += types[i].Count * types[i].ProfitInSeconds;
+        }
+        Electricity += summ;
+        //Наверное здесь должна быть проверка на работу типа
+
     }
+}
+[System.Serializable]
+class Generators
+{
+    public float Count;
+    public float ProfitInSeconds;
+    public bool IsWork = true;
+    public string name = "";
+
 }
