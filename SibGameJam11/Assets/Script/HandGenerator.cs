@@ -11,6 +11,7 @@ public class HandGenerator : MonoBehaviour
     public float GeneratingSpeed = 1;
     public float RotationOffset = 10;
 
+    private GameManager gameManager;
     private Camera mainCam;
     private float lastAngle;
     private float angle;
@@ -18,6 +19,7 @@ public class HandGenerator : MonoBehaviour
 
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         mainCam = Camera.main;
     }
 
@@ -57,8 +59,7 @@ public class HandGenerator : MonoBehaviour
         if (Mathf.Abs(angle - lastAngle) >= RotationOffset)
         {
             lastAngle = angle;
-            Electricity += GeneratingSpeed;
-            print(Electricity);
+            gameManager.Electricity += GeneratingSpeed;
         }
     }
 }
