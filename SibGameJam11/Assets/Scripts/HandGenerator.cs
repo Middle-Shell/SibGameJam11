@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DragonBones;
 
 public class HandGenerator : MonoBehaviour
 {
     public GameObject Rukoyat;
     public GameObject Clickable;
-    public Transform RotationPivot;
+    public UnityEngine.Transform RotationPivot;
     [Header("Electricity")]
     public float Electricity = 0;
     public float GeneratingSpeed = 1;
     public float RotationOffset = 10;
+    [Header("Animations")]
+    public UnityArmatureComponent MyAnimator;
 
     private GameManager gameManager;
     private Camera mainCam;
@@ -39,14 +42,15 @@ public class HandGenerator : MonoBehaviour
         if (isGrabbed) RotateToCursor();
 
         GenerateElectricity();
+        Animate();
     }
 
     private void RotateToCursor()
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = (transform.position - mainCam.transform.position).z;
+        mousePos.z = (RotationPivot.position - mainCam.transform.position).z;
 
-        Vector3 objectPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 objectPos = Camera.main.WorldToScreenPoint(RotationPivot.position);
         mousePos.x = mousePos.x - objectPos.x;
         mousePos.y = mousePos.y - objectPos.y;
 
@@ -61,6 +65,24 @@ public class HandGenerator : MonoBehaviour
         {
             lastAngle = angle;
             gameManager.Electricity += GeneratingSpeed * Time.deltaTime;
+        }
+    }
+
+    private void Animate()
+    {
+        if (MyAnimator != null)
+        {
+            if (isGrabbed)
+            {
+                if (MyAnimator.animation.lastAnimationName != "1")
+                {
+                    MyAnimator.animation.Play("1");
+                }
+            }
+            else
+            {
+                MyAnimator.animation.Play("0");
+            }
         }
     }
 }
