@@ -6,14 +6,18 @@ public class CreaterAdv : MonoBehaviour
 {
 
 	public GameObject Prefabs; 
-	private GameObject Advertisment; 
+	private GameObject Advertisment;
+	private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
+    	gameManager = FindObjectOfType<GameManager>();
     	for (int i = 0; i < 3; i++)
         {
         	Advertisment = Instantiate(Prefabs, new Vector3(0, 0, 0), Quaternion.identity, this.gameObject.transform );
             Advertisment.GetComponent<ButtonWork>().IndexOfType = i;
+            Advertisment.GetComponent<ButtonWork>().Title.text = gameManager.autoGenerators[i].NameOfGeneratorType;
         }
     }
 

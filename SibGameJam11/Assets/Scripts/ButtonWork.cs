@@ -8,6 +8,7 @@ public class ButtonWork : MonoBehaviour
 {
 	[SerializeField] 
 	public TextMeshProUGUI Title;
+	public TextMeshProUGUI PricePerformance;
 	private GameObject Shop;
 	public int IndexOfType;
 	public Button Button;
@@ -24,8 +25,7 @@ public class ButtonWork : MonoBehaviour
 
     void TaskOnClick()
     {
-		Shop.GetComponent<ShopManager>().BuyGen(IndexOfType);
-		Title.text = "ХУЕТА";	
+		Shop.GetComponent<ShopManager>().BuyGen(IndexOfType);	
 	}
 
     // Update is called once per frame
