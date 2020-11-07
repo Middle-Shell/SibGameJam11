@@ -6,6 +6,7 @@ public class HandGenerator : MonoBehaviour
 {
     public GameObject Rukoyat;
     public GameObject Clickable;
+    public Transform RotationPivot;
     [Header("Electricity")]
     public float Electricity = 0;
     public float GeneratingSpeed = 1;
