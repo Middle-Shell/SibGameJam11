@@ -53,6 +53,7 @@ public class ShopManager : MonoBehaviour
 
     }
 }
+
 [System.Serializable]
 public class PricesSelf
 {

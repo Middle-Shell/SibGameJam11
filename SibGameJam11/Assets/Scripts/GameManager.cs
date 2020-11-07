@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour
             ElectricityInTotal += generator.NumberOfGenerators * generator.ElectricityPerMoment * Time.deltaTime;
             Electricity += generator.NumberOfGenerators * generator.ElectricityPerMoment * Time.deltaTime;
         }
-
-        //print(Mathf.FloorToInt(Electricity));
     }
 
     #region Debuff:
