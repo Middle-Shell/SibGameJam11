@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float ElectricityInTotal;
     [Space]
 
-    [SerializeField] Generator[] generators;
+    [SerializeField] public Generator[] generators;
     private Generator GetElementByType(string type)
     {
         Generator elementOfType = null;
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
             Electricity += generator.NumberOfGenerators * generator.ElectricityPerMoment * Time.deltaTime;
         }
 
-        print(Mathf.FloorToInt(Electricity));
+        //print(Mathf.FloorToInt(Electricity));
     }
 
     #region Debuff:
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 }
 
 [System.Serializable]
-class Generator
+public class Generator
 {
     public string GeneratorType;
     public int NumberOfGenerators;
