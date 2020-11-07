@@ -11,10 +11,12 @@ public class ShopManager : MonoBehaviour
 
 	public int[] PricesGen = new int[] { 10, 20, 30}; //ценники для покупки других генераторов
 
+    
+
     void Start()
     {
     	gameManager = FindObjectOfType<GameManager>();
-    	handGanerator = GameObject.FindGameObjectWithTag("Generator");;
+    	handGanerator = GameObject.FindGameObjectWithTag("Generator");
         
     }
     public void BuyUpSelf(int i)
