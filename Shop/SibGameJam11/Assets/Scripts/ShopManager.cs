@@ -38,9 +38,9 @@ public class ShopManager : MonoBehaviour
     public void BuyGen(int i)
     {
     	print(Mathf.FloorToInt(gameManager.Electricity));
-    	if (gameManager.Electricity >= PricesGen[i-1])
+    	if (gameManager.Electricity >= PricesGen[i])
     	{
-    		gameManager.Electricity -= PricesGen[i-1];
+    		gameManager.Electricity -= PricesGen[i];
     		gameManager.generators[i].NumberOfGenerators += 1;
     	}
     	else
