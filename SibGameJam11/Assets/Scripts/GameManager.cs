@@ -9,17 +9,14 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float ElectricityInTotal;
     [Space]
 
-    public AutoGenerator[] autoGenerators;
-    [Space]
-    public AutoGenerator ActiveGenerator = null;
-
-    private AutoGenerator GetElementByType(string type)
+    [SerializeField] public Generator[] generators;
+    private Generator GetElementByType(string type)
     {
-        AutoGenerator elementOfType = null;
+        Generator elementOfType = null;
 
-        foreach (var generatorType in autoGenerators)
+        foreach (var generatorType in generators)
         {
-            if (generatorType.NameOfGeneratorType == type)
+            if (generatorType.GeneratorType == type)
             {
                 elementOfType = generatorType;
             }
@@ -30,10 +27,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        foreach (var generator in autoGenerators)
+        foreach (var generator in generators)
         {
-            ElectricityInTotal += generator.NumOfGenerators * generator.CurrentElectricityPerMoment * Time.deltaTime;
-            Electricity += generator.NumOfGenerators * generator.CurrentElectricityPerMoment * Time.deltaTime;
+            ElectricityInTotal += generator.NumberOfGenerators * generator.ElectricityPerMoment * Time.deltaTime;
+            Electricity += generator.NumberOfGenerators * generator.ElectricityPerMoment * Time.deltaTime;
         }
     }
 
@@ -46,14 +43,24 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator DebuffTime(string type, float debuffTime)
     {
-        AutoGenerator element = GetElementByType(type);
+        Generator element = GetElementByType(type);
+        float defaultElectricity = element.ElectricityPerMoment;
 
-        element.CurrentElectricityPerMoment /= 2;
+        element.ElectricityPerMoment /= 2;
 
         yield return new WaitForSeconds(debuffTime);
 
-        element.CurrentElectricityPerMoment = element.DefaultElectricityPerMoment;
+        element.ElectricityPerMoment = defaultElectricity;
     }
 
     #endregion
+}
+
+[System.Serializable]
+public class Generator
+{
+    public string GeneratorType;
+    public int NumberOfGenerators;
+    public bool IsWorking = true;
+    public float ElectricityPerMoment = 1;
 }

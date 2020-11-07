@@ -44,7 +44,7 @@ public class ShopManager : MonoBehaviour
     	if (gameManager.Electricity >= PricesGen[i])
     	{
     		gameManager.Electricity -= PricesGen[i];
-    		gameManager.autoGenerators[i].NumOfGenerators += 1;
+    		gameManager.generators[i].NumberOfGenerators += 1;
     	}
     	else
     	{
