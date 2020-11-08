@@ -23,6 +23,7 @@ public class CameraFocuser : MonoBehaviour
 
     private Camera myCamera;
     private GameManager gameManager;
+    private CameraConstantSize cameraScaler;
 
     private bool IsFocused;
     private Vector2 FucusPosition;
@@ -37,6 +38,7 @@ public class CameraFocuser : MonoBehaviour
         unfocusedPosition = transform.position;
         myCamera = GetComponent<Camera>();
         gameManager = FindObjectOfType<GameManager>();
+        cameraScaler = GetComponent<CameraConstantSize>();
     }
 
     void Update()
@@ -68,16 +70,18 @@ public class CameraFocuser : MonoBehaviour
         }
 
         Vector2 lerpedPos = Vector2.Lerp(transform.position, unfocusedPosition, lerpSpeed);
-        float lerpCameraSize = Mathf.Lerp(myCamera.orthographicSize, unfocusedCameraSize, lerpSpeed);
+        float lerpCameraSize = Mathf.Lerp(cameraScaler.FieldOfViewOffset, 0, lerpSpeed);
+        //cameraScaler.FieldOfViewOffset = 0;
 
         if (IsFocused)
         {
             lerpedPos = Vector2.Lerp(transform.position, FucusPosition - Offset, lerpSpeed);
-            lerpCameraSize = Mathf.Lerp(myCamera.orthographicSize, focusedCameraSize, lerpSpeed);
+            lerpCameraSize = Mathf.Lerp(cameraScaler.FieldOfViewOffset, focusedCameraSize - unfocusedCameraSize, lerpSpeed);
         }
 
+        cameraScaler.FieldOfViewOffset = lerpCameraSize;
         transform.position = new Vector3(lerpedPos.x, lerpedPos.y, transform.position.z);
-        myCamera.orthographicSize = lerpCameraSize;
+        //myCamera.orthographicSize = lerpCameraSize;
     }
 
     public void UnFocus()

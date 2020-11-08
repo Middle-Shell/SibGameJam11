@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a64e5b0e436d4bed9780211ae245f7b, type: 3}
+  m_Name: Stancia_2_Data
+  m_EditorClassIdentifier: 
+  dataName: Stancia_2
+  dragonBonesJSON: {fileID: 4900000, guid: 5085317f66e60f64ebc403f91333243a, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: 266ac36e2af863d459e1ba0946a5e4c7, type: 3}
+    texture: {fileID: 2800000, guid: be8dcb3e2d56b9c4dacd7e3b357aa42b, type: 3}
+    material: {fileID: 2100000, guid: d681a903eed08d842a4e460aa6e2d0c4, type: 2}
+    uiMaterial: {fileID: 0}

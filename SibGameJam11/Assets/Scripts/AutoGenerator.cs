@@ -97,7 +97,7 @@ public class AutoGenerator : MonoBehaviour
     IEnumerator RemoveBuff()
     {
         IsBuffed = true;
-        CurrentElectricityPerMoment *= 5;
+        CurrentElectricityPerMoment *= 3;
         VisualGenerator.animation.timeScale = 2;
 
         yield return new WaitForSeconds(.5f);
@@ -123,7 +123,7 @@ public class AutoGenerator : MonoBehaviour
     IEnumerator RemoveDebuff(float debuffTime)
     {
         IsDebuffed = true;
-        CurrentElectricityPerMoment /= 5;
+        CurrentElectricityPerMoment /= 3;
 
         yield return new WaitForSeconds(debuffTime);
 

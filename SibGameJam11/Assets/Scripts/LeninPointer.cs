@@ -16,6 +16,8 @@ public class LeninPointer : MonoBehaviour
     private GameManager gameManager;
     private float lastAngle;
 
+    public AudioSource[] Sounds;
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -39,7 +41,23 @@ public class LeninPointer : MonoBehaviour
         if (gameManager.ActiveGenerator != null && lastAngle != angle)
         {
             gameManager.ActiveGenerator.Buff();
+            
         }
         lastAngle = angle;
+    }
+
+    private void OnEnable()
+    {
+        int rnd = Random.Range(0, Sounds.Length);
+
+        Sounds[rnd].Play();
+    }
+
+    private void OnDisable()
+    {
+        //foreach (var sound in Sounds)
+        //{
+        //    sound.Stop();
+        //}
     }
 }
