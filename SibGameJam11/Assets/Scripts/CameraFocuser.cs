@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraFocuser : MonoBehaviour
 {
+    public GameObject Lenin;
+    [Space]
     public string GeneratorsTag;
     public float FocusSpeed = 1;
 
@@ -15,8 +17,8 @@ public class CameraFocuser : MonoBehaviour
     private Camera myCamera;
     private GameManager gameManager;
 
-    Vector2 FucusPosition;
     private bool IsFocused;
+    private Vector2 FucusPosition;
     private Vector3 unfocusedPosition;
     private float lerpSpeed;
 
@@ -40,10 +42,13 @@ public class CameraFocuser : MonoBehaviour
                 gameManager.ActiveGenerator = hitInfo.transform.gameObject.GetComponent<AutoGenerator>();
                 FucusPosition = hitInfo.transform.position;
                 IsFocused = true;
+                Lenin?.SetActive(true);
             }
             else
             {
                 IsFocused = false;
+                gameManager.ActiveGenerator = null;
+                Lenin?.SetActive(false);
             }
         }
 

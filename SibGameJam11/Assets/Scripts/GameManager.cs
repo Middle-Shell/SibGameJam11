@@ -9,17 +9,20 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float ElectricityInTotal;
     [Space]
 
+    public Transform HandGenerators;
+    [Space]
+
     public AutoGenerator[] autoGenerators;
     [Space]
     public AutoGenerator ActiveGenerator = null;
 
-    private AutoGenerator GetElementByType(string type)
+    public AutoGenerator GetGeneratorByType(string type)
     {
         AutoGenerator elementOfType = null;
 
         foreach (var generatorType in autoGenerators)
         {
-            if (generatorType.NameOfGeneratorType == type)
+            if (generatorType.TypeOfGenerator == type)
             {
                 elementOfType = generatorType;
             }
@@ -28,32 +31,35 @@ public class GameManager : MonoBehaviour
         return elementOfType;
     }
 
+    private void Start()
+    {
+        ElectricityInTotal = Electricity;
+    }
+
     void Update()
     {
-        foreach (var generator in autoGenerators)
+        foreach (var generatorType in autoGenerators)
         {
-            ElectricityInTotal += generator.NumOfGenerators * generator.CurrentElectricityPerMoment * Time.deltaTime;
-            Electricity += generator.NumOfGenerators * generator.CurrentElectricityPerMoment * Time.deltaTime;
+            if (generatorType.IsWorking)
+            {
+                ElectricityInTotal += generatorType.NumOfGenerators * generatorType.CurrentElectricityPerMoment * Time.deltaTime;
+                Electricity += generatorType.NumOfGenerators * generatorType.CurrentElectricityPerMoment * Time.deltaTime;
+            }
         }
     }
 
-    #region Debuff:
+    public void HandGeneratorUpgrade(int level)
+    {
+        foreach (Transform generator in HandGenerators)
+        {
+            generator.gameObject.SetActive(false);
+        }
+
+        HandGenerators.GetChild(level).gameObject.SetActive(true);
+    }
 
     public void DebuffGeneratorOfType(string type, float debuffTime)
     {
-        StartCoroutine(DebuffTime(type, debuffTime));
+        GetGeneratorByType(type).Debuff(debuffTime);
     }
-
-    private IEnumerator DebuffTime(string type, float debuffTime)
-    {
-        AutoGenerator element = GetElementByType(type);
-
-        element.CurrentElectricityPerMoment /= 2;
-
-        yield return new WaitForSeconds(debuffTime);
-
-        element.CurrentElectricityPerMoment = element.DefaultElectricityPerMoment;
-    }
-
-    #endregion
 }

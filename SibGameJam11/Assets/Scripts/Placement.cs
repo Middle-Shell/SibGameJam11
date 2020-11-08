@@ -7,6 +7,11 @@ public class Placement : MonoBehaviour
     public GameObject LightedBuilding;
     public GameObject DarkBuilding;
 
+    private void Start()
+    {
+        TurnOffElectricity();
+    }
+
     public void TurnOnElectricity()
     {
         LightedBuilding.SetActive(true);

@@ -19,7 +19,8 @@ public class EventManager : MonoBehaviour
             if (!gameEvent.Executed && gameManager.ElectricityInTotal >= gameEvent.EnergyNeeded)
             {
                 gameEvent.Executed = true;
-                //gameManager.DebuffGeneratorOfType(gameEvent.TypeOfGenerators, gameEvent.DebuffTime);
+                gameManager.DebuffGeneratorOfType(gameEvent.TypeOfGenerators, gameEvent.DebuffTime);
+                print(gameEvent.NameOfEvent);
             }
         }
     }

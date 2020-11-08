@@ -7,23 +7,37 @@ public class CreaterAdv : MonoBehaviour
 
 	public GameObject Prefabs; 
 	private GameObject Advertisment;
+
 	private GameManager gameManager;
 
-    // Start is called before the first frame update
     void Start()
     {
     	gameManager = FindObjectOfType<GameManager>();
-    	for (int i = 0; i < 3; i++)
+        AddInfo();
+    }
+
+    public void UpdateInfo()
+    {
+        for (int i = 0; i < transform.childCount; i++)
         {
-        	Advertisment = Instantiate(Prefabs, new Vector3(0, 0, 0), Quaternion.identity, this.gameObject.transform );
-            Advertisment.GetComponent<ButtonWork>().IndexOfType = i;
-            Advertisment.GetComponent<ButtonWork>().Title.text = gameManager.autoGenerators[i].NameOfGeneratorType;
+            Destroy(transform.GetChild(i).gameObject);
+        }
+        AddInfo();
+    }
+
+    private void AddInfo()
+    {
+        for (int i = 0; i < gameManager.autoGenerators.Length; i++)
+        {
+            Advertisment = Instantiate(Prefabs, new Vector3(0, 0, 0), Quaternion.identity, this.gameObject.transform);
+            Advertisment.GetComponent<ButtonWorker>().Title.text = gameManager.autoGenerators[i].TypeOfGenerator;
+            Advertisment.GetComponent<ButtonWorker>().GeneratorType = gameManager.autoGenerators[i].TypeOfGenerator;
+            Advertisment.GetComponent<ButtonWorker>().PricePerformance.text =  $"Стоимость: {gameManager.autoGenerators[i].CostOfOne} Эл."
+                + $"\n{gameManager.autoGenerators[i].DefaultElectricityPerMoment}"
+                + " Эл/сек\n"
+                + $"Колличество: {gameManager.autoGenerators[i].NumOfGenerators}";
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

@@ -278,7 +278,6 @@ GameObject:
   - component: {fileID: 2281906915701118126}
   - component: {fileID: 2281906915701118121}
   - component: {fileID: 2281906915701118127}
-  - component: {fileID: -8026848310352484628}
   m_Layer: 0
   m_Name: Update12
   m_TagString: Untagged
@@ -387,8 +386,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: BuyUpSelf
+      - m_Target: {fileID: 2281906915701118123}
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -398,19 +397,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-8026848310352484628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2281906915701118123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326849a3df09f9d498773cdd6b4ab184, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Title: {fileID: 2281906914440685203}
-  PricePerformance: {fileID: 2281906914524867151}
-  IndexOfType: 0
-  Button: {fileID: 2281906915701118127}

@@ -48,7 +48,7 @@ public class LeninPointer : MonoBehaviour
 
             if (gameManager.ActiveGenerator != null)
             {
-
+                gameManager.ActiveGenerator.Buff();
             }
         }
     }
