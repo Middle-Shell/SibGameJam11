@@ -22,14 +22,9 @@ public class TutorialSlider : MonoBehaviour
         {
             slider.SetActive(false);
         }
-
         if (CurrentSlide < Slides.Length)
         {
             Slides[CurrentSlide].SetActive(true);
-        }
-        else
-        {
-            gameObject.SetActive(false);
         }
     }
 }
