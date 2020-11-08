@@ -22,7 +22,6 @@ public class EventManager : MonoBehaviour
         {
             if (!gameEvent.Executed && gameManager.ElectricityInTotal >= gameEvent.EnergyNeeded)
             {
-                gameEvent.Executed = true;
 
                 MessegeFieldText.text = gameEvent.Message;
                 MessegeField.SetActive(true);
@@ -31,12 +30,20 @@ public class EventManager : MonoBehaviour
                 {
                     case GameEvent.DebuffType.DebuffAllGenerators:
                         gameManager.DebuffGeneratorsByTypes(gameEvent.DebuffTime);
+                        gameEvent.Executed = true;
                         break;
+
                     case GameEvent.DebuffType.TurnOffGeneratorType:
                         gameManager.TurnOffGeneratorsByTypes(gameEvent.TypesOfGenerators, gameEvent.DebuffTime);
+                        gameEvent.Executed = true;
                         break;
+
                     case GameEvent.DebuffType.SubsractElectrecity:
-                        gameManager.SubstractElectricity(gameEvent.substractNum);
+                        if (gameManager.Electricity >= gameEvent.MinElectro)
+                        {
+                            gameManager.SubstractElectricity(gameEvent.substractNum);
+                            gameEvent.Executed = true;
+                        }
                         break;
                 }
             }
@@ -57,11 +64,12 @@ class GameEvent
     public DebuffType MyDebuffType;
     [Header("SubstractType")]
     public float substractNum = 0;
+    public float MinElectro = 0;
     [Header("OtherTypes")]
     public string[] TypesOfGenerators;
     public float DebuffTime = 5;
     [Space, TextArea(5, 50)] public string Message = "";
-    [HideInInspector] public bool Executed = false;
+    public bool Executed = false;
 
     public enum DebuffType
     {

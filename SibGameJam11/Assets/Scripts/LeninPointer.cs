@@ -14,6 +14,7 @@ public class LeninPointer : MonoBehaviour
     private bool isGrabbed = false;
     private Camera mainCam;
     private GameManager gameManager;
+    private float lastAngle;
 
     void Start()
     {
@@ -23,34 +24,22 @@ public class LeninPointer : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = (LeninHend.position - mainCam.transform.position).z;
+        mousePos.x = mousePos.x - LeninHend.position.x;
+        mousePos.y = mousePos.y - LeninHend.position.y;
+
+        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg - 26;
+
+        LeninHend.rotation = Quaternion.Lerp(
+            LeninHend.rotation,
+            Quaternion.Euler(0, 0, Mathf.Clamp(angle, MinAngle, MaxAngle)),
+            Time.deltaTime * RotatingSpeed);
+
+        if (gameManager.ActiveGenerator != null && lastAngle != angle)
         {
-            isGrabbed = true;
-            
+            gameManager.ActiveGenerator.Buff();
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            isGrabbed = false;
-        }
-
-        if (isGrabbed)
-        {
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = (LeninHend.position - mainCam.transform.position).z;
-            mousePos.x = mousePos.x - LeninHend.position.x;
-            mousePos.y = mousePos.y - LeninHend.position.y;
-
-            float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg - 26;
-
-            LeninHend.rotation = Quaternion.Lerp(
-                LeninHend.rotation, 
-                Quaternion.Euler(0, 0, Mathf.Clamp(angle, MinAngle, MaxAngle)), 
-                Time.deltaTime * RotatingSpeed);
-
-            if (gameManager.ActiveGenerator != null)
-            {
-                gameManager.ActiveGenerator.Buff();
-            }
-        }
+        lastAngle = angle;
     }
 }

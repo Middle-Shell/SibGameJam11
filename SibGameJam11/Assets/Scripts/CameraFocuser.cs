@@ -48,7 +48,8 @@ public class CameraFocuser : MonoBehaviour
                 RaycastHit hitInfo = new RaycastHit();
                 if (Physics.Raycast(myCamera.ScreenPointToRay(Input.mousePosition), out hitInfo) && hitInfo.transform.tag == GeneratorsTag)
                 {
-                    gameManager.ActiveGenerator = hitInfo.transform.gameObject.GetComponent<AutoGenerator>();
+                    gameManager.ActiveGenerator = hitInfo.transform.parent.gameObject.GetComponent<AutoGenerator>();
+                    print(hitInfo.transform.name);
                     FucusPosition = hitInfo.transform.position;
                     IsFocused = true;
                     Lenin?.SetActive(true);

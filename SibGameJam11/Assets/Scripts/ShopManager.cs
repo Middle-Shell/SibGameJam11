@@ -5,11 +5,14 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
 
+    public float Multiplier = 1.1f;
+
 	private GameManager gameManager;
 	private GameObject handGanerator;
 	[SerializeField] public PricesSelf[] PricesUpSelf; //класс товаров для прокачки своего генератора
 
-    
+    [Header("Sound")]
+    public AudioSource BuySound;
 
     void Start()
     {
@@ -24,8 +27,9 @@ public class ShopManager : MonoBehaviour
             gameManager.Electricity -= PricesUpSelf[i].Cost;
             PricesUpSelf[i].Status = false;
             gameManager.HandGeneratorUpgrade(PricesUpSelf[i].VisualHandGenerator);
+            BuySound.Play();
             Destroy(button);
-    	}
+        }
     	else
     	{
     		print("Где деньги, Лебовски?");
@@ -40,8 +44,11 @@ public class ShopManager : MonoBehaviour
         if (gameManager.Electricity >= generator.CostOfOne)
     	{
     		gameManager.Electricity -= generator.CostOfOne;
+            generator.CostOfOne = Mathf.FloorToInt(generator.CostOfOne * Multiplier);
             generator.NumOfGenerators++;
-    	}
+            BuySound.Play();
+
+        }
     	else
     	{
     		print("Где деньги, Лебовски?");

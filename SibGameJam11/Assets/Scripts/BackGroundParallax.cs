@@ -22,6 +22,6 @@ public class BackGroundParallax : MonoBehaviour
         var pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pz.z = 0;
 
-        myTransform.localPosition = new Vector3(StartPos.x + (pz.x * -modifier), StartPos.y + (pz.y * -modifier), myTransform.localPosition.z);
+        myTransform.localPosition = Vector3.Lerp(myTransform.localPosition, new Vector3(StartPos.x + (pz.x * -modifier), StartPos.y + (pz.y * -modifier), myTransform.localPosition.z), Time.deltaTime);
     }
 }

@@ -7,16 +7,20 @@ public class AutoGenerator : MonoBehaviour
 {
     public string TypeOfGenerator;
     public int NumOfGenerators; //цена
-    public int CostOfOne; //цена
+    public float CostOfOne; //цена
     public float DefaultElectricityPerMoment = 1; //значение увелечения
     /*[HideInInspector]*/public float CurrentElectricityPerMoment = 1;
     public bool IsWorking = true;
     [Space, Header("Visuals")]
     public UnityArmatureComponent VisualGenerator;
     public Placement myPlacement;
+    [Header("Audio")]
+    public AudioSource GenerorTurnOffSound;
+    public AudioSource GenerorTurnOnSound;
 
     private bool IsBuffed = false;
     private bool IsDebuffed = false;
+    private bool lastIsWorking;
 
     private void Start()
     {
@@ -56,6 +60,27 @@ public class AutoGenerator : MonoBehaviour
         else if (NumOfGenerators > 0 && IsWorking)
         {
             myPlacement.TurnOnElectricity();
+        }
+
+        if (lastIsWorking != IsWorking)
+        {
+            SFX();
+        }
+        lastIsWorking = IsWorking;
+    }
+
+    private void SFX()
+    {
+        if (NumOfGenerators > 0)
+        {
+            if (!IsWorking)
+            {
+                GenerorTurnOffSound.Play();
+            }
+            else
+            {
+                GenerorTurnOnSound.Play();
+            }
         }
     }
 

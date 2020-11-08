@@ -6246,7 +6246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TypeOfGenerator: Common
-  NumOfGenerators: 1
+  NumOfGenerators: 0
   CostOfOne: 50
   DefaultElectricityPerMoment: 0.5
   CurrentElectricityPerMoment: 1

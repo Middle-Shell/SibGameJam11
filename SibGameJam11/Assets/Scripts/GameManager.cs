@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     [Space]
     public AutoGenerator ActiveGenerator = null;
 
+    [Space, Header("Sounds")]
+    public AudioSource UpgradeSound;
+
     public AutoGenerator GetGeneratorByType(string type)
     {
         AutoGenerator elementOfType = null;
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
         }
 
         currentGenerator.SetActive(true);
+        UpgradeSound?.Play();
     }
 
     public void DebuffGeneratorsByTypes(float debuffTime)

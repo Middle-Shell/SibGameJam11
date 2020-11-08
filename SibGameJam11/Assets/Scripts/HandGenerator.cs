@@ -13,6 +13,7 @@ public class HandGenerator : MonoBehaviour
     public float RotationOffset = 10;
     [Header("Animations")]
     public UnityArmatureComponent MyAnimator;
+    public AudioSource PlaySound;
 
     private GameManager gameManager;
     private Camera mainCam;
@@ -42,6 +43,7 @@ public class HandGenerator : MonoBehaviour
 
         GenerateElectricity();
         Animate();
+        SFX();
     }
 
     private void RotateToCursor()
@@ -83,6 +85,21 @@ public class HandGenerator : MonoBehaviour
             {
                 MyAnimator.animation.Play("0");
             }
+        }
+    }
+
+    private void SFX()
+    {
+        if (isGrabbed)
+        {
+            if (!PlaySound.isPlaying)
+            {
+                PlaySound.Play();
+            }
+        }
+        else
+        {
+            PlaySound.Stop();
         }
     }
 }
