@@ -7,7 +7,7 @@ public class Transfer : MonoBehaviour
 {
     public void Start()
     {
-    	InvokeRepeating("Play", 51.0f, 0f);
+    	InvokeRepeating("Play", 25.0f, 25.0f);
         
     }
 
