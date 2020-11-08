@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 	public float Electricity = 0;
-    [HideInInspector] public float ElectricityInTotal;
+    /*[HideInInspector] */public float ElectricityInTotal;
     [Space]
 
     public Transform HandGenerators;
@@ -58,8 +58,22 @@ public class GameManager : MonoBehaviour
         currentGenerator.SetActive(true);
     }
 
-    public void DebuffGeneratorOfType(string type, float debuffTime)
+    public void DebuffGeneratorsByTypes(float debuffTime)
     {
-        GetGeneratorByType(type).Debuff(debuffTime);
+        foreach (var generator in autoGenerators)
+        {
+            generator.Debuff(debuffTime);
+        }
+    }
+    public void TurnOffGeneratorsByTypes(string[] types, float debuffTime)
+    {
+        foreach (var type in types)
+        {
+            GetGeneratorByType(type).TurnOff(debuffTime);
+        }
+    }
+    public void SubstractElectricity(float substractNum)
+    {
+        Electricity -= substractNum;
     }
 }
