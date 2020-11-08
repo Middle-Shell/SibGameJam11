@@ -48,14 +48,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void HandGeneratorUpgrade(int level)
+    public void HandGeneratorUpgrade(GameObject currentGenerator)
     {
         foreach (Transform generator in HandGenerators)
         {
             generator.gameObject.SetActive(false);
         }
 
-        HandGenerators.GetChild(level).gameObject.SetActive(true);
+        currentGenerator.SetActive(true);
     }
 
     public void DebuffGeneratorOfType(string type, float debuffTime)

@@ -9,7 +9,6 @@ public class HandGenerator : MonoBehaviour
     public GameObject Clickable;
     public UnityEngine.Transform RotationPivot;
     [Header("Electricity")]
-    public float Electricity = 0;
     public float GeneratingSpeed = 1;
     public float RotationOffset = 10;
     [Header("Animations")]

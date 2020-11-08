@@ -26,6 +26,7 @@ public class LeninPointer : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             isGrabbed = true;
+            
         }
         if (Input.GetMouseButtonUp(0))
         {

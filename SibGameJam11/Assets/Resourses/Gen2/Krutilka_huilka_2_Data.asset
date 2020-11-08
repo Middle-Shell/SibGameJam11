@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a64e5b0e436d4bed9780211ae245f7b, type: 3}
-  m_Name: Stancia_1_Data
+  m_Name: Krutilka_huilka_2_Data
   m_EditorClassIdentifier: 
-  dataName: Stancia_1
-  dragonBonesJSON: {fileID: 4900000, guid: 0ca09493e0963d94ca8ec7b351204def, type: 3}
+  dataName: Krutilka_huilka_2
+  dragonBonesJSON: {fileID: 4900000, guid: 15ea0f89bbc7fe54c9e7f3cce74d1095, type: 3}
   textureAtlas:
-  - textureAtlasJSON: {fileID: 4900000, guid: 63b4e88ae0f98384eb8a3b62482651d5, type: 3}
-    texture: {fileID: 2800000, guid: 4a60b24dccf855b4f97674d5c4d3d344, type: 3}
-    material: {fileID: 2100000, guid: 655e752c4fc26854fa9c4d4542e25707, type: 2}
+  - textureAtlasJSON: {fileID: 4900000, guid: 96231bfe36e9d9a479fd93238a1b7adc, type: 3}
+    texture: {fileID: 2800000, guid: 391b61b388c302244bd343f325d6b41e, type: 3}
+    material: {fileID: 2100000, guid: 3d3a0497396a3964e8fbfcbe9d7b6eb7, type: 2}
     uiMaterial: {fileID: 0}

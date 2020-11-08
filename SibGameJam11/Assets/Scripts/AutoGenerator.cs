@@ -28,12 +28,10 @@ public class AutoGenerator : MonoBehaviour
         if (NumOfGenerators == 0)
         {
             VisualGenerator.gameObject.SetActive(false);
-            myPlacement.TurnOffElectricity();
         }
         else
         {
             VisualGenerator.gameObject.SetActive(true);
-            myPlacement.TurnOnElectricity();
         }
 
         if (IsWorking)
@@ -42,7 +40,6 @@ public class AutoGenerator : MonoBehaviour
             {
                 VisualGenerator.animation.Play("0");
             }
-            myPlacement.TurnOnElectricity();
         }
         else
         {
@@ -50,7 +47,15 @@ public class AutoGenerator : MonoBehaviour
             {
                 VisualGenerator.animation.Play("1");
             }
+        }
+
+        if (NumOfGenerators == 0 || !IsWorking)
+        {
             myPlacement.TurnOffElectricity();
+        }
+        else if (NumOfGenerators > 0 && IsWorking)
+        {
+            myPlacement.TurnOnElectricity();
         }
     }
 
@@ -68,18 +73,14 @@ public class AutoGenerator : MonoBehaviour
     {
         IsBuffed = true;
         CurrentElectricityPerMoment *= 2;
+        VisualGenerator.animation.timeScale = 2;
 
         yield return new WaitForSeconds(.5f);
 
         IsBuffed = false;
-        if (!IsDebuffed)
-        {
-            CurrentElectricityPerMoment = DefaultElectricityPerMoment;
-        }
-        else
-        {
-            CurrentElectricityPerMoment = DefaultElectricityPerMoment / 2;
-        }
+        VisualGenerator.animation.timeScale = 1;
+        
+        CurrentElectricityPerMoment = DefaultElectricityPerMoment;
     }
 
     #endregion

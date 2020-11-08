@@ -5,10 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Generator
-<<<<<<< HEAD
   - Shop
-=======
->>>>>>> parent of f5d22fb... Added a lot of stuff
+  - GameManager
+  - Lenin
   layers:
   - Default
   - TransparentFX

@@ -17,15 +17,14 @@ public class ShopManager : MonoBehaviour
     	handGanerator = GameObject.FindGameObjectWithTag("Generator");
         
     }
-    public void BuyUpSelf(int i)
+    public void BuyUpSelf(int i, GameObject button)
     {
     	if (gameManager.Electricity >= PricesUpSelf[i].Cost)
-    	{
-    		if (PricesUpSelf[i].Status)
-    		{
-    			gameManager.Electricity -= PricesUpSelf[i].Cost;
-    			PricesUpSelf[i].Status = false;
-    		}
+        {
+            gameManager.Electricity -= PricesUpSelf[i].Cost;
+            PricesUpSelf[i].Status = false;
+            gameManager.HandGeneratorUpgrade(PricesUpSelf[i].VisualHandGenerator);
+            Destroy(button);
     	}
     	else
     	{
@@ -56,4 +55,5 @@ public class PricesSelf
     public string NameOfBuy;
     public int Cost; //цена
     public bool Status = true;
+    public GameObject VisualHandGenerator;
 }
