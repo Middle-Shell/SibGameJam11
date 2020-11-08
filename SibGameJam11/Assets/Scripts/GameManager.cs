@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [Space, Header("Sounds")]
     public AudioSource UpgradeSound;
 
+    public GameObject EndScreen;
+
     public AutoGenerator GetGeneratorByType(string type)
     {
         AutoGenerator elementOfType = null;
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviour
         UpgradeSound?.Play();
     }
 
+    
+
     public void DebuffGeneratorsByTypes(float debuffTime)
     {
         foreach (var generator in autoGenerators)
@@ -69,6 +73,12 @@ public class GameManager : MonoBehaviour
             generator.Debuff(debuffTime);
         }
     }
+    
+    public void SubstractElectricity(float substractNum)
+    {
+        Electricity -= substractNum;
+    }
+
     public void TurnOffGeneratorsByTypes(string[] types, float debuffTime)
     {
         foreach (var type in types)
@@ -76,8 +86,9 @@ public class GameManager : MonoBehaviour
             GetGeneratorByType(type).TurnOff(debuffTime);
         }
     }
-    public void SubstractElectricity(float substractNum)
+    
+    public void End()
     {
-        Electricity -= substractNum;
+        EndScreen.SetActive(true);
     }
 }

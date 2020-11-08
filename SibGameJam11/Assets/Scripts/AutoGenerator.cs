@@ -18,17 +18,24 @@ public class AutoGenerator : MonoBehaviour
     public AudioSource GenerorTurnOffSound;
     public AudioSource GenerorTurnOnSound;
 
+    private GameManager gameManager;
     private bool IsBuffed = false;
     private bool IsDebuffed = false;
     private bool lastIsWorking;
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         CurrentElectricityPerMoment = DefaultElectricityPerMoment;
     }
 
     private void Update()
     {
+        if (TypeOfGenerator == "Ультра" && NumOfGenerators >= 15)
+        {
+            gameManager.End();
+        }
+
         if (NumOfGenerators == 0)
         {
             VisualGenerator.gameObject.SetActive(false);
@@ -86,21 +93,21 @@ public class AutoGenerator : MonoBehaviour
 
     #region Buff:
 
-    public void Buff()
+    public void Buff(float buffTime)
     {
         if (!IsBuffed)
         {
-            StartCoroutine(RemoveBuff());
+            StartCoroutine(RemoveBuff(buffTime));
         }
     }
 
-    IEnumerator RemoveBuff()
+    IEnumerator RemoveBuff(float buffTime)
     {
         IsBuffed = true;
         CurrentElectricityPerMoment *= 3;
         VisualGenerator.animation.timeScale = 2;
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(buffTime);
 
         IsBuffed = false;
         VisualGenerator.animation.timeScale = 1;

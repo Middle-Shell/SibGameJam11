@@ -40,7 +40,7 @@ public class LeninPointer : MonoBehaviour
 
         if (gameManager.ActiveGenerator != null && lastAngle != angle)
         {
-            gameManager.ActiveGenerator.Buff();
+            gameManager.ActiveGenerator.Buff(.5f);
             
         }
         lastAngle = angle;
@@ -51,13 +51,5 @@ public class LeninPointer : MonoBehaviour
         int rnd = Random.Range(0, Sounds.Length);
 
         Sounds[rnd].Play();
-    }
-
-    private void OnDisable()
-    {
-        //foreach (var sound in Sounds)
-        //{
-        //    sound.Stop();
-        //}
     }
 }
