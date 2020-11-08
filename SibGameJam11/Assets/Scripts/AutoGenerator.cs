@@ -72,7 +72,7 @@ public class AutoGenerator : MonoBehaviour
     IEnumerator RemoveBuff()
     {
         IsBuffed = true;
-        CurrentElectricityPerMoment *= 5;
+        CurrentElectricityPerMoment *= 2;
         VisualGenerator.animation.timeScale = 2;
 
         yield return new WaitForSeconds(.5f);
@@ -97,34 +97,15 @@ public class AutoGenerator : MonoBehaviour
 
     IEnumerator RemoveDebuff(float debuffTime)
     {
-        IsDebuffed = true;
-        CurrentElectricityPerMoment /= 5;
-
-        yield return new WaitForSeconds(debuffTime);
-
-        IsDebuffed = false;
-        CurrentElectricityPerMoment = DefaultElectricityPerMoment;
-    }
-
-    #endregion
-
-    #region TurnOff:
-
-    public void TurnOff(float debuffTime)
-    {
-        if (!IsDebuffed)
-        {
-            StartCoroutine(TurnOn(debuffTime));
-        }
-    }
-
-    IEnumerator TurnOn(float debuffTime)
-    {
+        //IsDebuffed = true;
+        //CurrentElectricityPerMoment /= 2;
         IsWorking = false;
 
         yield return new WaitForSeconds(debuffTime);
 
         IsWorking = true;
+        //IsDebuffed = false;
+        //CurrentElectricityPerMoment = DefaultElectricityPerMoment;
     }
 
     #endregion
