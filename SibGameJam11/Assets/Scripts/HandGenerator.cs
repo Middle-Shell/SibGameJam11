@@ -65,7 +65,6 @@ public class HandGenerator : MonoBehaviour
         if (Mathf.Abs(angle - lastAngle) >= RotationOffset)
         {
             lastAngle = angle;
-            gameManager.ElectricityInTotal += GeneratingSpeed * Time.deltaTime;
             gameManager.Electricity += GeneratingSpeed * Time.deltaTime;
         }
     }
